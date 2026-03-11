@@ -1,0 +1,21 @@
+meta {
+  name: Calc
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:3000/calculator/add?num1=10&num2=15
+  body: none
+  auth: inherit
+}
+
+params:query {
+  num1: 10
+  num2: 15
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Hello
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/hello?name=Lara
+  body: none
+  auth: inherit
+}
+
+params:query {
+  name: Lara
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
