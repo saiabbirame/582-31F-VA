@@ -201,3 +201,98 @@ fruits.forEach(function (fruit) {
     console.log(fruit);
 });
 ```
+
+## `for...of` Loop
+- loops through array values directly
+- simple way to print each item
+
+```javascript
+for (const fruit of fruits) {
+    console.log(fruit);
+}
+```
+
+## `for` Loop
+- gives access to the index
+- useful when you need more control
+
+```javascript
+for (let i = 0; i < fruits.length; i++) {
+    if (i == 1) {
+        console.log(fruits[i]);
+    }
+}
+```
+
+## `while` Loop
+- repeats while the condition is true
+- must update the counter to avoid infinite loops
+
+```javascript
+let index = 0;
+
+while (index < fruits.length) {
+    console.log(fruits[index]);
+    index++;
+}
+```
+
+## `find()`
+- returns the first element that matches a condition
+- stops when it finds the first match
+
+```javascript
+const prices = [10, 20, 30, 40];
+console.log(prices);
+
+const firstBigPrice = prices.find(function (price) {
+    return price > 25;
+});
+
+console.log("Find function: " + firstBigPrice);
+```
+
+## `filter()`
+- returns all elements that match a condition
+- creates a new array
+
+```javascript
+const expensivePrices = prices.filter(function (price) {
+    return price > 25;
+});
+
+console.log("Filter Function: ");
+console.log(expensivePrices);
+```
+
+## `map()`
+- transforms each element in the array
+- returns a new array
+
+```javascript
+const formattedPrices = prices.map(function (price) {
+    return "$" + price;
+});
+
+console.log(formattedPrices);
+```
+## Object with Method
+- objects can also contain functions
+- a function inside an object is called a method
+- `this` refers to the current object
+
+```javascript
+const product = {
+    name: "Keyboard",
+    price: 49.99,
+    inStock: true,
+    describe: function () {
+        return this.name + " costs $" + this.price;
+    }
+};
+
+console.log(product.name);
+console.log(product.describe());
+```
+
+
