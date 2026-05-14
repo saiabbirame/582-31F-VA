@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User & Posts Dashboard</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+</head>
+<body>
+    <main class="container my-4">
+        <h1>User & Posts Dashboard</h1>
+
+        <p>Load users from an API and view their posts.</p>
+
+        <div class="mb-3">
+            <button id="load-users-btn" class="btn btn-primary">Load Users</button>
+            <button id="clear-btn" class="btn btn-secondary">Clear</button>
+        </div>
+
+        <p id="status" class="alert alert-warning">Ready to load users.</p>
+
+        <section>
+            <div id="users-row" class="row g-3"></div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>
