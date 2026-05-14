@@ -37,6 +37,10 @@ loadUsersBtn.addEventListener("click", () => {
                                 <p><strong>City:</strong> ${users[i].address.city}</p>
 
                                 <p><strong>Company:</strong> ${users[i].company.name}</p>
+
+                                <button class="btn btn-outline-primary">
+                                    Load Posts
+                                </button>
                             </div>
                         </div>
                     </div>
