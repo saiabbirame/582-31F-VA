@@ -8,9 +8,13 @@ function setStatus(message, type) {
     status.className = `alert alert-${type}`;
 }
 
-loadUsersBtn.addEventListener("click", () => {
-    setStatus("Loading users...", "warning");
+function clearDashboard() {
+    usersRow.innerHTML = "";
+    setStatus("Ready to load users.", "secondary");
+}
 
+function loadUsers() {
+    setStatus("Loading users...", "warning");
     usersRow.innerHTML = "";
 
     const userFetch = fetch("https://jsonplaceholder.typicode.com/users");
@@ -24,32 +28,39 @@ loadUsersBtn.addEventListener("click", () => {
         })
         .then((users) => {
             for (let i = 0; i < 5; i++) {
-                usersRow.innerHTML += `
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <h2 class="card-title">${users[i].name}</h2>
-
-                                <p><strong>Email:</strong> ${users[i].email}</p>
-
-                                <p><strong>Phone:</strong> ${users[i].phone}</p>
-
-                                <p><strong>City:</strong> ${users[i].address.city}</p>
-
-                                <p><strong>Company:</strong> ${users[i].company.name}</p>
-
-                                <button class="btn btn-outline-primary">
-                                    Load Posts
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                `;
+               renderUserCard(users[i]);
             }
-
             setStatus("Users loaded successfully!", "success");
         })
         .catch((error) => {
             setStatus(`Failed to load users: ${error.message}`, "danger");
         });
-});
+}
+
+function renderUserCard(user) {
+    usersRow.innerHTML += `
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h2 class="card-title">${user.name}</h2>
+
+                    <p><strong>Email:</strong> ${user.email}</p>
+
+                    <p><strong>Phone:</strong> ${user.phone}</p>
+
+                    <p><strong>City:</strong> ${user.address.city}</p>
+
+                    <p><strong>Company:</strong> ${user.company.name}</p>
+
+                    <button class="btn btn-outline-primary load-posts-btn" data-user-id="${user.id}>
+                        Load Posts
+                    </button>
+
+                    <div class="posts-container mt-3">
+                        <p>No posts loaded yet.</p>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    `;
+}
