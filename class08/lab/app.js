@@ -52,8 +52,12 @@ function renderUserCard(user) {
 
                     <p><strong>Company:</strong> ${user.company.name}</p>
 
-                    <button class="btn btn-outline-primary load-posts-btn" onclick="loadPostsForUser(${user.id})">
+                    <button class="btn btn-outline-primary me-3" onclick="loadPostsForUser(${user.id})">
                         Load Posts
+                    </button>
+
+                    <button class="btn btn-outline-secondary" onclick="togglePosts(${user.id})">
+                        Show/Hide Posts
                     </button>
 
                     <div class="posts-container mt-3" id="posts-${user.id}">
@@ -101,6 +105,16 @@ function renderPosts(posts, container) {
                 <p>${posts[i].body}</p>
             </div>
         `;
+    }
+}
+
+function togglePosts(userId) {
+    const postsContainer = document.getElementById(`posts-${userId}`);
+
+    if (postsContainer.style.display === "none") {
+        postsContainer.style.display = "block";
+    } else {
+        postsContainer.style.display = "none";
     }
 }
 
