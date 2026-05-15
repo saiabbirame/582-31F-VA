@@ -67,7 +67,7 @@ function renderUserCard(user) {
 
 function loadPostsForUser(userId) {
     const postsContainer = document.getElementById(`posts-${userId}`);
-    
+
     postsContainer.innerHTML = "<p>Loading posts...</p>";
 
     const postsFetch = fetch("https://jsonplaceholder.typicode.com/posts");
@@ -84,20 +84,24 @@ function loadPostsForUser(userId) {
                 return post.userId === userId;
             });
 
-            postsContainer.innerHTML = "";
-
-            for (let i = 0; i < 3; i++) {
-                postsContainer.innerHTML += `
-                    <div class="pt-2 mt-2">
-                        <h3>${userPosts[i].title}</h3>
-                        <p>${userPosts[i].body}</p>
-                    </div>
-                `;
-            }
+            renderPosts(userPosts, postsContainer);
         })
         .catch((error) => {
             postsContainer.innerHTML = `<p>Failed to load posts: ${error.message}</p>`;
         });
+}
+
+function renderPosts(posts, container) {
+    container.innerHTML = "";
+
+    for (let i = 0; i < 3; i++) {
+        container.innerHTML += `
+            <div class="pt-2 mt-2">
+                <h3>${posts[i].title}</h3>
+                <p>${posts[i].body}</p>
+            </div>
+        `;
+    }
 }
 
 loadUsersBtn.addEventListener("click", loadUsers);
