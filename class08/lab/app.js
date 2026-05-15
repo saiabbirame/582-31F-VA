@@ -64,3 +64,36 @@ function renderUserCard(user) {
         </div>
     `;
 }
+
+function loadPostsForUser(userId, postsContainer) {
+    postsContainer.innerHTML = "<p>Loading posts...</p>";
+
+    const postsFetch = fetch("https://jsonplaceholder.typicode.com/posts");
+
+    postsFetch
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((posts) => {
+            const userPosts = posts.filter((post) => {
+                return post.userId === userId;
+            });
+
+            postsContainer.innerHTML = "";
+
+            for (let i = 0; i < 3; i++) {
+                postsContainer.innerHTML += `
+                    <div class="pt-2 mt-2>
+                        <h3>${userPosts[i].title}</h3>
+                        <p>${userPosts[i].body}</p>
+                    </div>
+                `;
+            }
+        })
+        .catch((error) => {
+            postsContainer.innerHTML = `<p>Failed to load posts: ${error.message}</p>`;
+        });
+}
