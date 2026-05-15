@@ -10,7 +10,7 @@ function setStatus(message, type) {
 
 function clearDashboard() {
     usersRow.innerHTML = "";
-    setStatus("Ready to load users.", "secondary");
+    setStatus("Dashboard cleared.", "secondary");
 }
 
 function loadUsers() {
