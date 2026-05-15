@@ -52,11 +52,11 @@ function renderUserCard(user) {
 
                     <p><strong>Company:</strong> ${user.company.name}</p>
 
-                    <button class="btn btn-outline-primary load-posts-btn" data-user-id="${user.id}>
+                    <button class="btn btn-outline-primary load-posts-btn" onclick="loadPostsForUser(${user.id})">
                         Load Posts
                     </button>
 
-                    <div class="posts-container mt-3">
+                    <div class="posts-container mt-3" id="posts-${user.id}">
                         <p>No posts loaded yet.</p>
                     </div> 
                 </div>
@@ -65,7 +65,9 @@ function renderUserCard(user) {
     `;
 }
 
-function loadPostsForUser(userId, postsContainer) {
+function loadPostsForUser(userId) {
+    const postsContainer = document.getElementById(`posts-${userId}`);
+    
     postsContainer.innerHTML = "<p>Loading posts...</p>";
 
     const postsFetch = fetch("https://jsonplaceholder.typicode.com/posts");
@@ -86,7 +88,7 @@ function loadPostsForUser(userId, postsContainer) {
 
             for (let i = 0; i < 3; i++) {
                 postsContainer.innerHTML += `
-                    <div class="pt-2 mt-2>
+                    <div class="pt-2 mt-2">
                         <h3>${userPosts[i].title}</h3>
                         <p>${userPosts[i].body}</p>
                     </div>
@@ -97,3 +99,7 @@ function loadPostsForUser(userId, postsContainer) {
             postsContainer.innerHTML = `<p>Failed to load posts: ${error.message}</p>`;
         });
 }
+
+loadUsersBtn.addEventListener("click", loadUsers);
+clearBtn.addEventListener("click", clearDashboard);
+
