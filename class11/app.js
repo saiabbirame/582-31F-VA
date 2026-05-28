@@ -75,6 +75,10 @@ Dog.prototype.bark = function () {
   return `${this.name} barks loudly`;
 };
 
+Dog.prototype.describe = function () {
+  return `${this.name} is a ${this.breed}`;
+};
+
 const dog1 = new Dog("Buddy", "Golden Retriever");
 
 console.log(dog1.describe());
