@@ -24,7 +24,7 @@ export function clearDashboard(teamsContainer, detailsContainer) {
 }
 
 export function renderTeamDetails(team, detailsContainer) {
-    detailsContainer = `
+    detailsContainer.innerHTML = `
         <h3>${team.name}</h3>
         <p>Group: ${team.group}</p>
         <p>Points: ${team.points}</p>

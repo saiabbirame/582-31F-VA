@@ -1,6 +1,6 @@
 import { fetchTeams } from "./api.js";
 import { Team } from "./team.js";
-import "./team-card.js ";
+import "./team-card.js";
 import { renderTeams, clearDashboard, renderTeamDetails } from "./ui.js";
 
 const loadBtn = document.getElementById("load-btn");
