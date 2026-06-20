@@ -38,3 +38,7 @@ clearBtn.addEventListener("click", () => {
 
     status.textContent = "Dashboard cleared!";
 });
+
+teamsContainer.addEventListener("team-selected", (event) => {
+    renderTeamDetails(event.detail, detailsContainer);
+});

@@ -62,7 +62,25 @@ class TeamCard extends HTMLElement {
                 <button>View Details</button>
             </div>
         `;
-    }
+
+        const button = shadow.querySelector("button");
+
+        button.addEventListener("click", () => {
+            this.dispatchEvent(
+                new CustomEvent("team-selected", {
+                    bubbles: true,
+                    details: {
+                        id: Number(this.getAttribute("id")),
+                        name: this.getName(),
+                        group: this.getGroup(),
+                        points: this.getPoints(),
+                        played: this.getPlayed(),
+                        goalDifference: this.getGoalDifference()
+                    },
+                })
+            );
+        });
+    };
 }
 
 customElements.define("team-card", TeamCard);
