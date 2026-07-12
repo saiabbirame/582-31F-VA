@@ -26,11 +26,21 @@ class ArtistCard extends HTMLElement {
         return this.getAttribute("headliner") || "Unknown Headliner";
     }
 
+    getIsHeadliner() {
+        return this.getHeadliner();
+    }
+
     render() {
         const shadow = this.attachShadow({ mode: "open" });
 
         const template = document.getElementById("artist-template");
         const clone = template.contentEditable.cloneNode(true);
+
+        const card = clone.querySelector(".card");
+
+        if (this.getIsHeadliner()) {
+            card.classList.add("headliner");
+        }
 
         clone.querySelector(".artist-name").textContent = this.getName();
         clone.querySelector(".artist-genre").textContent = `Genre: ${this.getGenre()}`;
