@@ -14,6 +14,11 @@ let artists = [];
 loadBtn.addEventListener("click", () => {
     status.textContent = "Loading lineup...";
 
+    lineupContainer.innerHTML = "";
+    detailsContainer.innerHTML = `
+        <p>No artist selected yet.</p>
+    `;
+
     fetchArtists()
         .then((data) => {
             artists = [];
