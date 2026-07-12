@@ -23,7 +23,7 @@ class ArtistCard extends HTMLElement {
         return this.getAttribute("country") || "Unknown Country";
     }
     getHeadliner() {
-        return this.getAttribute("headliner") || "Unknown Headliner";
+        return this.getAttribute("headliner") === "true";
     }
 
     getIsHeadliner() {
@@ -34,7 +34,7 @@ class ArtistCard extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
 
         const template = document.getElementById("artist-template");
-        const clone = template.contentEditable.cloneNode(true);
+        const clone = template.content.cloneNode(true);
 
         const card = clone.querySelector(".card");
 
@@ -49,9 +49,9 @@ class ArtistCard extends HTMLElement {
         clone.querySelector(".artist-country").textContent = `Country: ${this.getCountry()}`;
         clone.querySelector(".artist-headliner").textContent = this.getHeadliner() ? "Headliner: Yes" : "Headliner: No";
 
-        const button = clone.querySelector("details-btn");
+        const button = clone.querySelector(".details-btn");
 
-        button.addEventListenener("click", () => {
+        button.addEventListener("click", () => {
             this.dispatchEvent(
                 new CustomEvent("artist-selected", {
                     bubbles: true,

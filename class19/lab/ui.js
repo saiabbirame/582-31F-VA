@@ -20,7 +20,7 @@ export function clearDashboard(lineupContainer, detailsContainer) {
     lineupContainer.innerHTML = "";
 
     detailsContainer.innerHTML = `
-        <p>No artist selected yet.<p>
+        <p>No artist selected yet.</p>
     `;
 }
 
