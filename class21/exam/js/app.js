@@ -26,6 +26,17 @@ const resetButton = document.getElementById("reset-filters");
 
 let performances = [];
 
+function disableControls() {
+  searchInput.disabled = true;
+  stageFilter.disabled = true;
+  ticketsFilter.disabled = true;
+  featuredFilter.disabled = true;
+  sortSelect.disabled = true;
+  resetButton.disabled = true;
+}
+
+disableControls();
+
 async function loadLineup() {
   renderLoading();
 
@@ -74,12 +85,12 @@ async function loadLineup() {
     sortSelect.disabled = false;
     resetButton.disabled = false;
   } catch (error) {
-    console.log("Lineup loaded:", error);
+    console.error("Lineup loading failed:", error);
 
     renderError(error);
   }
 
-  loadButton.disabled = true;
+  loadButton.disabled = false;
 }
 
 function applyFilters() {

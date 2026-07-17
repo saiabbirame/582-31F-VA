@@ -21,7 +21,7 @@ export function renderLoading() {
 }
 
 export function renderError(error) {
-  statusOutput.textContent = `Error: ${error}`;
+  statusOutput.textContent = `Error: ${error.message}`;
 
   performanceCount.textContent = "0";
 }

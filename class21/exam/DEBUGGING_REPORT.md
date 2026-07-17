@@ -27,3 +27,17 @@ I corrected the API loading process, fixed the constructors and inheritance for 
 
 **Test:**
 I loaded the festival lineup and confirmed that all performances displayed correctly with the correct summary information. I also tested searching, filtering, sorting and resetting the filters to ensure they worked without any console errors.
+
+## Bug 3 - Inital and error state controls
+
+**File:**
+app.js and ui.js
+
+**Problem:**
+The filters were enabled before loading the lineup, the Load lineup button stayed disabled after loading, errors were logged with `console.log()` and the page displayed a duplicated error prefix.
+
+**Fix:**
+I added an inital control-disabling function, re-enabled the Load button after loading, changed error logging to `console.error()` and users error.message in the UI.
+
+**Test:**
+I verified the inital page state, successful repeated loading, failed artist request, failed performance request, disabled filters during errors, zeroed summaries, retry behavior and restored normal loading.

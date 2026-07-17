@@ -26,7 +26,7 @@ export class Performance {
   }
 
   get lineupLabel() {
-    return "Standard performance";
+    return "Regular lineup";
   }
 
   static totalAvailableTickets(performances) {
