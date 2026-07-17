@@ -69,3 +69,17 @@ I added `resetButton.disabled = true;` after `applyFilters()`.
 
 **Test:**
 I changed the filters, clicked Reset and confirmed the button became disabled again.
+
+## Bug 6 - Artist label showed the genre instead of the country
+
+**File:**
+Artist.js
+
+**Problem:**
+The artist label displayed the genre instead of the country. 
+
+**Fix:**
+I changed `return `${this.artistName} — ${this.genre}`;` to `return `${this.artistName} — ${this.country}`;`.
+
+**Test:**
+I loaded the lineup and confirmed each card now displayes the artist name followed by the correct country.
