@@ -7,6 +7,6 @@ export default class Artist {
   }
 
   get displayLabel() {
-    return `${this.artistName} — ${this.genre}`;
+    return `${this.artistName} — ${this.country}`;
   }
 }

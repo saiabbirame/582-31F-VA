@@ -41,3 +41,17 @@ I added an inital control-disabling function, re-enabled the Load button after l
 
 **Test:**
 I verified the inital page state, successful repeated loading, failed artist request, failed performance request, disabled filters during errors, zeroed summaries, retry behavior and restored normal loading.
+
+## Bug 4 - Empty filter result showed the wrong status
+
+**File:**
+ui.js
+
+**Problem:**
+When no performances matched the filters, the app still said "Festival lineup laoded successfully." 
+
+**Fix:**
+I changed `if (!performances)` to `if (performances.length === 0)` so it shows "No performances match the current fitlers.
+
+**Test:**
+I searched something that doesn't exist and confirmed the correct message shows up, all cards disappear and the summaries go to 0.
