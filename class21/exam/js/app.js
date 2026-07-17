@@ -151,6 +151,8 @@ function resetFilters() {
   sortSelect.value = "time-asc";
 
   applyFilters();
+
+  resetButton.disabled = true;
 }
 
 loadButton.addEventListener("click", loadLineup);

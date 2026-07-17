@@ -55,3 +55,17 @@ I changed `if (!performances)` to `if (performances.length === 0)` so it shows "
 
 **Test:**
 I searched something that doesn't exist and confirmed the correct message shows up, all cards disappear and the summaries go to 0.
+
+## Bug 5 - Reset button stayed enabled
+
+**File:**
+app.js
+
+**Problem:**
+After clicking Reset, the button stayed enabled. 
+
+**Fix:**
+I added `resetButton.disabled = true;` after `applyFilters()`.
+
+**Test:**
+I changed the filters, clicked Reset and confirmed the button became disabled again.
