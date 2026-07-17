@@ -13,3 +13,17 @@ I corrected the import and export statements so they matched, fixed the class in
 
 **Test:**
 I refreshed the browser after making the changes and confirmed that the application loaded without the previous module errors in the console.
+
+## Bug 2 - Data loading and lineup rendering
+
+**File:**
+api.js, app.js, FeaturedPerformance.js, Performance.js, PerformanceCard.js, Artist.js and ui.js
+
+**Problem:**
+The festival lineup could not load or display correctly because there were several issues with loading the JSON data, creating the performance objects, rendering the custom elements and calculating the lineup summary. The filtering features also had errors.
+
+**Fix:**
+I corrected the API loading process, fixed the constructors and inheritance for the model classes, corrected the custom element rendering, fixed the getters and setters, updated the summary calculations and corrected the filtering logic so searching, filtering, sorting and resetting all work properly.
+
+**Test:**
+I loaded the festival lineup and confirmed that all performances displayed correctly with the correct summary information. I also tested searching, filtering, sorting and resetting the filters to ensure they worked without any console errors.

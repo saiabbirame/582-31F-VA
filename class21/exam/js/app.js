@@ -24,22 +24,22 @@ const sortSelect = document.getElementById("sort-select");
 
 const resetButton = document.getElementById("reset-filters");
 
-let performances;
+let performances = [];
 
 async function loadLineup() {
-  renderLoading;
+  renderLoading();
 
   loadButton.disabled = true;
 
   try {
-    const data = getFestivalData();
+    const data = await getFestivalData();
 
     const artists = data.artists.map(
       (item) => new Artist(item.id, item.name, item.country, item.genre),
     );
 
     performances = data.performances.map((item) => {
-      const artist = artists.filter((artist) => artist.id === item.artistId);
+      const artist = artists.find((artist) => artist.id === item.artistId);
 
       if (item.featured) {
         return new FeaturedPerformance(
@@ -54,7 +54,7 @@ async function loadLineup() {
         );
       }
 
-      return new Performances(
+      return new Performance(
         item.id,
         item.title,
         artist,
@@ -65,7 +65,7 @@ async function loadLineup() {
       );
     });
 
-    renderPerformance(performances);
+    renderPerformances(performances);
 
     searchInput.disabled = false;
     stageFilter.disabled = false;
@@ -76,60 +76,70 @@ async function loadLineup() {
   } catch (error) {
     console.log("Lineup loaded:", error);
 
-    renderErrors(error);
+    renderError(error);
   }
 
   loadButton.disabled = true;
 }
 
 function applyFilters() {
-  const searchTerm = searchInput.value;
+  const searchTerm = searchInput.value
+    .trim()
+    .toLowerCase();
 
   const stage = stageFilter.value;
 
-  const availableOnly = ticketsFilter.value;
+  const availableOnly = ticketsFilter.checked;
 
-  const featuredOnly = featuredFilter.value;
+  const featuredOnly = featuredFilter.checked;
 
   const sort = sortSelect.value;
 
-  performances = performances.filter((performance) => {
+  const filteredPerformances = performances.filter((performance) => {
     const matchesSearch =
-      performance.title.includes(searchTerm) ||
-      performance.artist.includes(searchTerm);
+      performance.title
+        .toLowerCase()
+        .includes(searchTerm) ||
+      performance.artist.artistName
+        .toLowerCase()
+        .includes(searchTerm);
 
-    const matchesStage = stage === "" || performance.time === stage;
+    const matchesStage = stage === "" || performance.stage === stage;
 
-    const matchesTickets = !availableOnly || performance.ticketsRemaining;
+    const matchesTickets = !availableOnly || performance.hasTickets;
 
-    const matchesFeatured = !featuredOnly || performance instanceof Performance;
+    const matchesFeatured = !featuredOnly || performance instanceof FeaturedPerformance;
 
-    return matchesSearch || matchesStage || matchesTickets || matchesFeatured;
+    return ( matchesSearch && matchesStage && matchesTickets && matchesFeatured);
   });
 
   if (sort === "price-asc") {
-    performances.sort((a, b) => a.ticketPrice > b.ticketPrice);
+    filteredPerformances.sort((a, b) => a.ticketPrice - b.ticketPrice);
   }
 
   if (sort === "price-desc") {
-    performances.sort((a, b) => a.ticketPrice < b.ticketPrice);
+    filteredPerformances.sort((a, b) => b.ticketPrice - a.ticketPrice);
   }
 
   if (sort === "artist-asc") {
-    performances.sort((a, b) => a.artist.name - b.artist.name);
+    filteredPerformances.sort((a, b) => a.artist.artistName.localeCompare(b.artist.artistName));
   }
 
-  renderPerformance(performances);
+  if (sort === "time-asc") {
+    filteredPerformances.sort((a, b) => a.time.localeCompare(b.time));
+  }
+
+  renderPerformances(filteredPerformances);
 }
 
 function resetFilters() {
   searchInput.value = "";
   stageFilter.value = "";
-  ticketsFilter.value = false;
-  featuredFilter.value = false;
+  ticketsFilter.checked = false;
+  featuredFilter.checked = false;
   sortSelect.value = "time-asc";
 
-  applyFilters;
+  applyFilters();
 }
 
 loadButton.addEventListener("click", loadLineup);

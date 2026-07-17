@@ -1,12 +1,12 @@
 import { Performance } from "./Performance.js";
 
-const performanceContainer = document.getElementById("performances");
+const performanceContainer = document.getElementById("performance-list");
 
 const statusOutput = document.getElementById("status");
 
 const performanceCount = document.getElementById("performance-count");
 
-const ticketCount = document.getElementById("available-tickets");
+const ticketCount = document.getElementById("ticket-count");
 
 const averagePrice = document.getElementById("average-price");
 
@@ -26,20 +26,20 @@ export function renderError(error) {
   performanceCount.textContent = "0";
 }
 
-export function renderPerformances(performance) {
+export function renderPerformances(performances) {
   performanceContainer.innerHTML = "";
 
-  if (!performance) {
+  if (!performances) {
     statusOutput.textContent =
       "No performances match " + "the current filters.";
 
     return;
   }
 
-  performance.forEach((item) => {
-    const card = document.createElement("performance");
+  performances.forEach((item) => {
+    const card = document.createElement("performance-card");
 
-    card.data = item;
+    card.performance = item;
 
     performanceContainer.appendChild(card);
   });
@@ -48,7 +48,7 @@ export function renderPerformances(performance) {
 
   performanceCount.textContent = performances.length;
 
-  ticketCount.textContent = Performance.totalAvailableTickets(performance);
+  ticketCount.textContent = Performance.totalAvailableTickets(performances);
 
-  averagePrice.textContent = Performance.averagePrice;
+  averagePrice.textContent = Performance.averagePrice(performances);
 }
